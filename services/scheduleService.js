@@ -10,6 +10,10 @@ const IMAGES_DIR = path.join(__dirname, '../images/quran');
 const TOTAL_QURAN_PAGES = 604;
 const PAGE_INDEX_FILE = './pageIndex.json';
 
+// Check if pageIndex.json exists; if not, create it with a starting index
+if (!fs.existsSync(PAGE_INDEX_FILE))
+    fs.writeFileSync(PAGE_INDEX_FILE, JSON.stringify({ currentPageIndex: 1 }, null, 2));
+
 function getCurrentPageIndex() {
     const data = JSON.parse(fs.readFileSync(PAGE_INDEX_FILE, 'utf8'));
     return data.currentPageIndex || 1;

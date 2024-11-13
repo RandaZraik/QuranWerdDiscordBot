@@ -20,7 +20,7 @@ A simple Discord bot designed to post Quran Werd daily in a designated channel.
    CRON_SCHEDULE=<YOUR_CRON_SCHEDULE>          # Example: '38 7 * * *' to post daily at 7:38 AM
    PAGES_PER_POST=<NUMBER_OF_PAGES_TO_POST>    # Number of Quran pages to post each day
    ```
-- `pageIndex.json`: Already exists to track the current page index.
+- `pageIndex.json`: Gets auto created to track the current page index.
 - `logs/logs.txt`: Gets auto created to track bot activity, errors, and posting events.
 
 ## Running the Bot
