@@ -1,0 +1,26 @@
+{
+  "name": "quran-werd-discord-bot",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Qurant Werd Discord Bot",
+  "main": "bot.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18.x"
+  },
+  "scripts": {
+    "start": "node bot.js",
+    "register": "node commands.js",
+    "dev": "nodemon bot.js"
+  },
+  "author": "Randa Zraik",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.0.3",
+    "node-cron": "^3.0.3",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
