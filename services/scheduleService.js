@@ -37,9 +37,8 @@ async function postImages(channel) {
 
     for (const imagePath of imagePaths) {
         try {
-          if (successfulPosts == 2) throw new Error('Test error');
             await channel.send({ files: [imagePath] });
-            logger.info(`SUCESS: ${imagePath}`);
+            logger.info(`SUCCESS: ${imagePath}`);
             successfulPosts += 1;
         } catch (error) {
             logger.error(`FAIL: ${imagePath} - ${error.message}`);
