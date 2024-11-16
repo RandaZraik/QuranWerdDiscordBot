@@ -7,7 +7,7 @@ A simple Discord bot designed to post Quran Werd daily in a designated channel.
 
 - Node.js (version 18 or higher)
 - Docker (if running in a container)
-- Discord bot created with the appropriate permissions:
+- [Discord bot](https://discord.com/developers/applications) created with the appropriate permissions:
    - Send Messages.
    - Privileged Gateway Intents.
 
