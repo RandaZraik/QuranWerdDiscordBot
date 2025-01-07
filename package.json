@@ -10,7 +10,6 @@
   },
   "scripts": {
     "start": "node bot.js",
-    "register": "node commands.js",
     "dev": "nodemon bot.js"
   },
   "author": "Randa Zraik",
