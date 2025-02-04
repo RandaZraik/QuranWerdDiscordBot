@@ -4,23 +4,34 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from '../config/config.js';
 import logger from '../logger.js';
+import { db } from './firebaseService.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const IMAGES_DIR = path.join(__dirname, '../images/quran');
 const TOTAL_QURAN_PAGES = 604;
-const PAGE_INDEX_FILE = './pageIndex.json';
 
-// Check if pageIndex.json exists; if not, create it with a starting index
-if (!fs.existsSync(PAGE_INDEX_FILE))
-    fs.writeFileSync(PAGE_INDEX_FILE, JSON.stringify({ currentPageIndex: 1 }, null, 2));
-
-function getCurrentPageIndex() {
-    const data = JSON.parse(fs.readFileSync(PAGE_INDEX_FILE, 'utf8'));
-    return data.currentPageIndex || 1;
+async function getCurrentPageIndex() {
+  try {
+    const snapshot = await db.ref('pageIndex').once('value');
+    const data = snapshot.val();
+    if (data && data.currentPageIndex) {
+      return data.currentPageIndex;
+    } else {
+      await setCurrentPageIndex(1);
+      return 1;
+    }
+  } catch (error) {
+    logger.error("Error reading page index from Firebase: " + error.message);
+    return 1;
+  }
 }
 
-function setCurrentPageIndex(pageIndex) {
-    fs.writeFileSync(PAGE_INDEX_FILE, JSON.stringify({ currentPageIndex: pageIndex }), 'utf8');
+async function setCurrentPageIndex(pageIndex) {
+  try {
+    await db.ref('pageIndex').set({ currentPageIndex: pageIndex });
+  } catch (error) {
+    logger.error("Error writing page index to Firebase: " + error.message);
+  }
 }
 
 function getImagePaths(startPage, count) {
@@ -31,7 +42,7 @@ function getImagePaths(startPage, count) {
 }
 
 async function postImages(channel) {
-    let currentPageIndex = getCurrentPageIndex();
+    let currentPageIndex = await getCurrentPageIndex();
     const imagePaths = getImagePaths(currentPageIndex, config.pagesPerPost);
     let successfulPosts = 0;
 
@@ -46,7 +57,7 @@ async function postImages(channel) {
     }
 
     if (successfulPosts > 0) {
-        setCurrentPageIndex((currentPageIndex + successfulPosts) % TOTAL_QURAN_PAGES || 1);
+        await setCurrentPageIndex((currentPageIndex + successfulPosts) % TOTAL_QURAN_PAGES || 1);
     }
 }
 
