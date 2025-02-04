@@ -27,7 +27,8 @@ A simple Discord bot designed to post Quran Werd daily in a designated channel.
 
 - `.env` File:
    - Only required if running the bot locally or via Docker.
-   - Configure the file with the necessary environment variables:
+   - Create `.env` file in the root folder using the existing `.env.example` template file.
+   - Configure the new file with the necessary environment variables:
      ```
      DISCORD_TOKEN=<YOUR_DISCORD_BOT_TOKEN>
      CHANNEL_ID=<YOUR_CHANNEL_ID>
