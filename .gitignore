@@ -2,3 +2,4 @@ node_modules
 logs/
 firebase-service-account.json
 .env
+workflow.secrets
