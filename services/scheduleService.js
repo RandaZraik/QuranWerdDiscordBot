@@ -61,14 +61,18 @@ async function postImages(channel) {
     }
 }
 
+export async function postWerd(client, channelId) {
+    const channel = await client.channels.fetch(channelId).catch(() => {
+        logger.error("Failed to fetch channel for daily posts.");
+        return null;
+    });
+    if (channel) await postImages(channel);
+}
+
 // Schedules daily posting based on the configured cron schedule
-export function updateSchedule(client, channelId, cronSchedule) {
+export function scheduleWerd(client, channelId, cronSchedule) {
     cron.schedule(cronSchedule, async () => {
-        const channel = await client.channels.fetch(channelId).catch(() => {
-            logger.error("Failed to fetch channel for daily posts.");
-            return null;
-        });
-        if (channel) await postImages(channel);
+        postWerd(client, channelId);
     });
 
     logger.info(`Scheduled daily Quran Werd`);

@@ -1,0 +1,36 @@
+name: Daily Quran Werd Bot Run
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Create Firebase Service Account File
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "firebase-service-account.json"
+          json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Bot
+        run: npm start
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          PAGES_PER_POST: ${{ secrets.PAGES_PER_POST }}
+          FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
+          RUN_ONCE: true
