@@ -50,7 +50,7 @@ We need a database where we can maintain the next page index to post. To do so:
    - For Linux, run the Bash script: `./run.sh`.
 
 - To run it with GitHub Actions:
-   - Update the cron schedule in your workflow file `.github/workflows/schedule.yml` if needed (default is 4:00 AM UTC).
+   - Update the cron schedule in your workflow file `.github/workflows/schedule.yml` if needed (default is 3:00 AM UTC).
    - Push the repository to your GitHub account.
    - In your repository settings, add the following secrets:
      - DISCORD_TOKEN
