@@ -12,21 +12,16 @@ A simple Discord bot designed to post Quran Werd daily in a designated channel.
    - Privileged Gateway Intents.
 
 ## Firebase Setup
-   - Firebase Project:
-     - Create a project in Firebase dedicated for this bot.
-     - For more info: [Creating a Firebase Project](https://firebase.google.com/docs/web/setup).
-   - Realtime Database:
-     - Create a database under the created project to maintain the next page index to post.
-     - For more info: [Creating a Realtime Database](https://firebase.google.com/docs/database/web/start).
-   - Service Account File:
-     - In the Firebase Console, generate a private key from your project’s Service accounts tab.
-     - Download the JSON file and save it as `firebase-service-account.json` in the root folder.
-     - For more info: [Firebase Admin Setup](https://firebase.google.com/docs/admin/setup).
+We need a database where we can maintain the next page index to post. To do so:
+1. Create a Firebase project dedicated for this bot. More info: [Link](https://firebase.google.com/docs/web/setup).
+2. Create a Realtime database under the created project. More info: [Link](https://firebase.google.com/docs/database/web/start).
+3. Generate a private key for your Service account, and save the JSON file as `firebase-service-account.json` in the root folder. More info: [Link](https://firebase.google.com/docs/admin/setup).
 
 ## Environment Setup
 
+- Only required if running the bot locally or via Docker.
 - `.env` File:
-   - Only required if running the bot locally or via Docker.
+
    - Create `.env` file in the root folder using the existing `.env.example` template file.
    - Configure the new file with the necessary environment variables:
      ```
