@@ -30,6 +30,7 @@ We need a database where we can maintain the next page index to post. To do so:
      CRON_SCHEDULE=<YOUR_CRON_SCHEDULE>            # Example: '38 7 * * *' to post daily at 7:38 AM
      PAGES_PER_POST=<NUMBER_OF_PAGES_TO_POST>      # Number of Quran pages to post each day
      FIREBASE_DATABASE_URL=<FIREBASE_DATABASE_URL> # e.g., https://<your-project-id>-default-rtdb.firebaseio.com
+     QURAN_MODE=<tadabbur|general>                 # tadabbur mode is to include tadabbur notes.
      ```
 - Logs:
    - `logs/logs.txt`: Gets auto created to track bot activity, errors, and posting events.
@@ -58,3 +59,4 @@ We need a database where we can maintain the next page index to post. To do so:
      - PAGES_PER_POST
      - FIREBASE_DATABASE_URL
      - FIREBASE_SERVICE_ACCOUNT_JSON (paste the entire contents of your `firebase-service-account.json` file).
+     - QURAN_MODE

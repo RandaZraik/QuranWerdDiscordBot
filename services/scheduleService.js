@@ -7,7 +7,7 @@ import logger from '../logger.js';
 import { db } from './firebaseService.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const IMAGES_DIR = path.join(__dirname, '../images/quran');
+const IMAGES_DIR = path.join(__dirname, process.env.QURAN_MODE === 'tadabbur' ? '../images/quranTadabbur' : '../images/quran');
 const TOTAL_QURAN_PAGES = 604;
 
 async function getCurrentPageIndex() {
