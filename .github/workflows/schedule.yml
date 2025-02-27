@@ -34,3 +34,4 @@ jobs:
           PAGES_PER_POST: ${{ secrets.PAGES_PER_POST }}
           FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
           RUN_ONCE: true
+          QURAN_MODE: ${{ secrets.QURAN_MODE }}
