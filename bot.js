@@ -3,7 +3,7 @@ import { config } from './config/config.js';
 import { postWerd, scheduleWerd } from './services/scheduleService.js';
 import logger from './logger.js';
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
 client.once('ready', async () => {
     logger.info(`Logged in as ${client.user.tag}!`);

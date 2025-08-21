@@ -1,6 +1,6 @@
 import admin from 'firebase-admin';
 import { config } from '../config/config.js';
-import serviceAccount from '../firebase-service-account.json' assert { type: "json" };
+import serviceAccount from '../firebase-service-account.json' with { type: "json" };
 
 if (!admin.apps.length) {
   admin.initializeApp({
