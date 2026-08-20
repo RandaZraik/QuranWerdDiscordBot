@@ -7,6 +7,7 @@ docker run -d `
   --name discord-bot-quran-werd `
   --restart unless-stopped `
   --env-file .env `
-  -v ${PWD}/logs:/app/logs `
-  -v ${PWD}/pageIndex.json:/app/pageIndex.json `
+  -v "${PWD}/firebase-service-account.json:/app/firebase-service-account.json:ro" `
+  -v "${PWD}/logs:/app/logs" `
+  -v "${PWD}/pageIndex.json:/app/pageIndex.json" `
   discord-bot-quran-werd

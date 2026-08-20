@@ -5,26 +5,32 @@ on:
     - cron: '0 3 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   post:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 18
-
-      - name: Create Firebase Service Account File
-        uses: jsdaniell/create-json@1.1.2
-        with:
-          name: "firebase-service-account.json"
-          json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+          node-version-file: package.json
+          cache: npm
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci --omit=dev --omit=optional --no-audit
+
+      - name: Create Firebase Service Account File
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          umask 077
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > firebase-service-account.json
 
       - name: Run Bot
         run: npm start
@@ -35,3 +41,7 @@ jobs:
           FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
           RUN_ONCE: true
           QURAN_MODE: ${{ secrets.QURAN_MODE }}
+
+      - name: Remove Firebase Service Account File
+        if: always()
+        run: rm -f firebase-service-account.json
