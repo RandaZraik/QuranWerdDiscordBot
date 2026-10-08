@@ -44,6 +44,7 @@ We need a database where we can maintain the next page index to post. To do so:
      npm install
      npm start
      ```
+   - For automatic restarts when the bot or its imported modules change, run `npm run dev`.
 
 - To run it with Docker:
    - Setup `.env` file as explained above.
